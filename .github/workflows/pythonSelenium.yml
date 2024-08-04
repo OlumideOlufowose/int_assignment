@@ -1,0 +1,31 @@
+# This workflow will run Python Selenium automation tests on every push to the main/dev branch
+
+name: Python Selenium Tests
+
+on:
+  push:
+    branches: [main, dev]
+
+jobs:
+  selenium-run:
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Set up Selenium webdriver
+        run: |
+          pip install selenium webdriver-manager
+
+      - name: Run Python Selenium tests
+        run: python -m unittest discover -s ./selenium -p "*.py"

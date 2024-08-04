@@ -1,0 +1,33 @@
+# This workflow will run Java Selenium automation tests using on every push to the main/dev branch
+
+name: Java Selenium Tests
+
+on:
+  push:
+    branches: [main, dev]
+
+jobs:
+  java_selenium-test:
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macOS-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 21.x
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
+
+      - name: Set up ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+
+      - name: Run Java Selenium tests
+        run: mvn test
