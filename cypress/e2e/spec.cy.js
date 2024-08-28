@@ -1,10 +1,9 @@
 describe('E-commerce Site Testing', () => {
   before(() => {
   // Visit website
-      cy.visit('https://jumia.com.ng');
+      cy.visit('https://www.jumia.com.ng');
 
-  // Maximizes window by setting the viewport size
-    cy.viewport('macbook-15'); 
+
   });
 
   it("add product to cart", { retries: 2 },  () => {
