@@ -1,5 +1,5 @@
 describe('E-commerce Site Testing', () => {
-    beforeEach(() => {
+    before(() => {
     // Visit website
         cy.visit('https://www.jumia.com.ng');
 
